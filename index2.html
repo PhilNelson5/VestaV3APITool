@@ -1,28 +1,18 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Vesta API Test Tool</title>
+        <title>Vesta V3 ECl Test API Tool</title>
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="styles/mystyle.css">
     </head>
     <body>
         <div id="layout">
-            <div id="header">Vesta API Test Tool</div>
+            <div id="header">Vesta V3 ECl Test API Tool</div>
             <div id="navbar">
-                <div> 
-                    <a class="btn btn-primary btn-med navbar-btn right" target="_blank" style="color: #fff" href='https://apigee.com/janrain/embed/console/jump-api?v=2&req={"resource"%3A"method_1216"%2C"params"%3A{}%2C"template"%3A{}%2C"headers"%3A{}%2C"verb"%3A"post"}'>
-                        <i class="janrain-icon-dashboard"></i>&nbsp;  Demo console
-                    </a>
-                </div>
-                <div> 
+<!--                <div> 
                     <input type="checkbox" name="indemnified" value="indemnified" onchange="updateRequiredFields(this)" checked> Indemnified?<br>
-                </div>
+                </div>-->
             </div>
             <div id="content">
                 <TABLE BORDER="1">
@@ -32,42 +22,43 @@ and open the template in the editor.
 
                             <form id="form1" method="post" action="actions2.php" style="width: 900px">       
                                 <select id="select" name="api_method" onChange="handleSelection(value)" >
-                                    <optgroup label="Individual API Calls">
+                                    <optgroup label="Charge and Reversal API Calls">
                                         <option value="empty">Choose Individual API Call</option>
-                                        <option value="ChallengeQuestionAnswer">Challenge Question Answer</option>            
-                                        <option value="ChallengeQuestionBegin">Challenge Question Begin</option>            
-                                        <option value="ChargeAccountToTemporaryToken">Charge Account to Temporary Token</option>
                                         <option value="ChargeAuthorize">Charge Authorize</option>
                                         <option value="ChargeConfirm">Charge Confirm</option>
-                                        <option value="ChargeGetPaymentDeviceInfo">Charge Get Payment Device Info</option>
                                         <option value="ChargeSale">Charge Sale</option>
-                                        <option value="CheckReportStatus">Check Report Status</option>
-                                        <option value="DownloadReportFile">Download Report File</option>
-                                        <option value="GenerateReport">Generate Report</option>
-                                        <option value="GetPaymentStatus">Get Payment Status</option>
+                                        <option value="CheckSale">Check Sale</option>
+                                        <option value="CPChargeSale">Card Present Charge Sale</option>
+                                        <option value="CPDebitSale">Card Present Debit Sale</option>
+                                        <option value="CPReversePayment">Card Present Reverse Payment</option>
+                                        <option value="CPSaleComplete">Card Present Sale Complete</option>
+                                        <option value="DebitSale">Debit Sale</option>
                                         <option value="GetSessionTags">Get Session Tags</option>
-                                        <option value="HeartBeat">HeartBeat</option>
+                                        <option value="ReversePayment">Reverse Payment</option>
+                                        <option value="ReverseCheckPayment">Reverse Check Payment</option>
+                                    </optgroup>
+                                    <optgroup label="Knowledge-Based Authentication API Calls">
+                                        <option value="ChallengeQuestionAnswer">Challenge Question Answer</option>
+                                        <option value="ChallengeQuestionBegin">Challenge Question Begin</option>
+                                    </optgroup>
+                                    <optgroup label="Token API Calls">
+                                        <option value="BankAccountToTemporaryToken">Bank Account To Temporary Token</option>
+                                        <option value="ChargeAccountToTemporaryToken">Charge Account To Temporary Token</option>
+                                        <option value="ValidateChargeAccount">Validate Charge Account</option>
+                                    </optgroup>
+                                    <optgroup label="Wallet API Calls">
                                         <option value="PaymentDeviceChargeRegister">Payment Device Charge Register</option>
                                         <option value="PaymentDeviceChargeUpdate">Payment Device Charge Update</option>
+                                        <option value="PaymentDeviceCheckRegister">Payment Device Charge Register</option>
+                                        <option value="PaymentDeviceCheckUpdate">Payment Device Charge Register</option>
                                         <option value="PaymentDeviceOnFileRemove">Payment Device On File Remove</option>
-                                        <option value="RecurringPaymentEnroll">Recurring Payment Enroll</option>
-                                        <option value="RecurringPaymentEnrollStatus">Recurring Payment Enrollment Status</option>
-                                        <option value="RecurringPaymentStatus">Recurring Payment Status</option>
-                                        <option value="RecurringPaymentUnenroll">Recurring Payment UnEnroll</option>            
-                                        <option value="ReversePayment">Reverse Payment</option>
-                                        <option value="TestCurl">Test Curl</option>
-                                        <option value="ValidateChargeAccount">Validate Charge Account</option>
                                         <option value="WalletCreate">Wallet Create</option>
                                         <option value="WalletList">Wallet List</option>
                                     </optgroup>
-                                    <optgroup label="Process Flows for API">
-                                        <option value="TokenOneStep" title="Tooltip">Token: One step</option>
-                                        <option value="TokenWithFingerprintOneStep" title="This calls getSessionTags, GetToken and ChargeSale with Hardcoded values for all fields not listed in form.">Token with Fingerprint: One step</option>
-                                        <option value="TokenTwoStep">Token with Fingerprint: Two step</option>            
-                                        <option value="TokenPending">Token: Pending</option>
-                                        <option value="EnrollAutoReload">Enroll Auto Reload</option>
-                                        <option value="ProcessingPPDTransaction">Processing PPD Transaction</option>
-                                        <option value="Refund">Refund a Transaction</option>
+                                    <optgroup label="Status API Calls">
+                                        <option value="ChargeGetPaymentDeviceInfo">Charge Get Payment Device Info</option>
+                                        <option value="GetPaymentStatus">Get Payment Status</option>
+                                        <option value="HeartBeat">HeartBeat</option>
                                     </optgroup>
                                 </select>
 
@@ -77,8 +68,20 @@ and open the template in the editor.
                                             <div id="accountName">
                                                 <label class="requiredred" for="AccountName">Account Name:</label> <input type="text" id="AccountName" name="AccountName" />
                                             </div>
+                                            <div id="additionalAmount">
+                                                <label class="requiredred" for="AdditionalAmount">Additional Amount:</label> <input type="text" id="AdditionalAmount" name="AdditionalAmount" />
+                                            </div>
+                                            <div id="additionalAmountType">
+                                                <label class="requiredred" for="AdditionalAmountType">Additional Amount Type:</label> <input type="text" id="AdditionalAmountType" name="AdditionalAmountType" />
+                                            </div>
+                                            <div id="amount">
+                                                <label class="requiredred" for="Amount">CP Refund Amount:</label> <input type="text" id="Amount" name="Amount" />
+                                            </div>
                                             <div id="answerNumber">
                                                 <label class="requiredred" for="AnswerNumber">Answer Number:</label> <input type="number" id="AnswerNumber" name="AnswerNumber" />
+                                            </div>
+                                            <div id="bankRoutingNumber">
+                                                <label class="requiredred" for="BankRoutingNumber">Bank Routing Number:</label> <input type="number" id="BankRoutingNumber" name="BankRoutingNumber" />
                                             </div>
                                             <div id="cardHolderAddressLine1">
                                                 <label class="requiredred" for="CardHolderAddressLine1">Address Line 1:</label> <input type="text" id="CardHolderAddressLine1" name="CardHolderAddressLine1" />
@@ -104,6 +107,15 @@ and open the template in the editor.
                                             <div id="cardHolderRegion">
                                                 <label class="requiredred" for="CardHolderRegion">Region:</label> <input type="text" id="CardHolderRegion" name="CardHolderRegion" />
                                             </div>
+                                            <div id="cardTrack1Data">
+                                                <label class="optional" for="CardTrack1Data">Card Track1 Data:</label> <input type="text" id="CardTrack1Data" name="CardTrack1Data" />
+                                            </div>
+                                            <div id="cardTrack2Data">
+                                                <label class="optional" for="CardTrack2Data">Card Track2 Data:</label> <input type="text" id="CardTrack2Data" name="CardTrack2Data" />
+                                            </div>
+                                            <div id="cardTypeIndicator">
+                                                <label class="requiredred" for="CardTypeIndicator">Card Type Indicator (1,2,3):</label> <input type="text" id="CardTypeIndicator" name="CardTypeIndicator" />
+                                            </div>
                                             <div id="chargeAccountNumberToken">
                                                 <label class="requiredred" for="ChargeAccountNumberToken">Charge Account Token:</label> <input type="text" id="ChargeAccountNumberToken" name="ChargeAccountNumberToken" />
                                             </div>
@@ -125,8 +137,95 @@ and open the template in the editor.
                                             <div id="chargeSource">
                                                 <label class="requiredred" for="ChargeSource">Charge Source (PPD, TEL, WEB)</label> <input type="text" id="ChargeSource" name="ChargeSource" />
                                             </div>
+                                            <div id="checkAccountNumber">
+                                                <label class="requiredred" for="CheckAccountNumber">Check Account Number/Token:</label> <input type="text" id="CheckAccountNumber" name="CheckAccountNumber" />
+                                            </div>
+                                            <div id="checkAccountNumberIndicator">
+                                                <label class="requiredred" for="CheckAccountNumberIndicator">Check Account Number Indicator:</label> <input type="number" id="CheckAccountNumberIndicator" name="CheckAccountNumberIndicator" />
+                                            </div>
+                                            <div id="checkAmount">
+                                                <label class="requiredred" for="CheckAmount">Check Amount:</label> <input type="text" id="CheckAmount" name="CheckAmount" />
+                                            </div>
+                                            <div id="checkHolderAddressLine1">
+                                                <label class="requiredred" for="CheckHolderAddressLine1">Address Line 1:</label> <input type="text" id="CheckHolderAddressLine1" name="CheckHolderAddressLine1" />
+                                            </div>
+                                            <div id="checkHolderAddressLine2">
+                                                <label class="optional" for="CheckHolderAddressLine2">Address Line 2:</label> <input type="text" id="CheckHolderAddressLine2" name="CheckHolderAddressLine2" />
+                                            </div>
+                                            <div id="checkHolderCity">
+                                                <label class="requiredred" for="CheckHolderCity">City:</label> <input type="text" id="CheckHolderCity" name="CheckHolderCity" />
+                                            </div>
+                                            <div id="checkHolderCompanyName">
+                                                <label class="optional" for="checkHolderCompanyName">Check Holder Company Name:</label> <input type="text" id="checkHolderCompanyName" name="checkHolderCompanyName" />
+                                            </div>
+                                            <div id="checkHolderCountryCode">
+                                                <label class="requiredred" for="CheckHolderCountryCode">Country Code:</label> <input type="text" id="CheckHolderCountryCode" name="CheckHolderCountryCode" />
+                                            </div>
+                                            <div id="checkHolderDateOfBirth">
+                                                <label class="optional" for="CheckHolderDateOfBirth">Check Holder DOB:</label> <input type="text" id="CheckHolderDateOfBirth" name="CheckHolderDateOfBirth" />
+                                            </div>
+                                            <div id="checkHolderFirstName">
+                                                <label class="requiredred" for="CheckHolderFirstName">First Name:</label> <input type="text" id="CheckHolderFirstName" name="CheckHolderFirstName" />
+                                            </div>
+                                            <div id="checkHolderLastName">
+                                                <label class="requiredred" for="CheckHolderLastName">Last Name:</label> <input type="text" id="CheckHolderLastName" name="CheckHolderLastName" />
+                                            </div>
+                                            <div id="checkHolderPhoneNumber">
+                                                <label class="optional" for="CheckHolderPhoneNumber">Check Holder Phone Number:</label> <input type="text" id="CheckHolderPhoneNumber" name="CheckHolderPhoneNumber" />
+                                            </div>
+                                            <div id="checkHolderPostalCode">
+                                                <label class="requiredred" for="CheckHolderPostalCode">Postal Code:</label> <input type="text" id="CheckHolderPostalCode" name="CheckHolderPostalCode" />
+                                            </div> 
+                                            <div id="checkHolderRegion">
+                                                <label class="requiredred" for="CheckHolderRegion">Region:</label> <input type="text" id="CheckHolderRegion" name="CheckHolderRegion" />
+                                            </div>
+                                            <div id="checkNumber">
+                                                <label class="requiredred" for="CheckNumber">Check Number:</label> <input type="text" id="CheckNumber" name="CheckNumber" />
+                                            </div>
+                                            <div id="checkSource">
+                                                <label class="requiredred" for="CheckSource">Check Source (PPD, TEL, WEB)</label> <input type="text" id="CheckSource" name="CheckSource" />
+                                            </div>
+                                            <div id="checkType">
+                                                <label class="requiredred" for="CheckType">Check Type:</label> <input type="text" id="CheckType" name="CheckType" />
+                                            </div>
+                                            <div id="createdByUser">
+                                                <label class="optional" for="CreatedByUser">Created by User:</label> <input type="text" id="CreatedByUser" name="CreatedByUser" />
+                                            </div>
+                                            <div id="dayOfBirth">
+                                                <label class="optional" for="DayOfBirth">Day of Birth:</label> <input type="text" id="DayOfBirth" name="DayOfBirth" />
+                                            </div>
+                                            <div id="debitAccountNumber">
+                                                <label class="requiredred" for="DebitAccountNumber">Debit Account Number:</label> <input type="text" id="DebitAccountNumber" name="DebitAccountNumber" />
+                                            </div>
+                                            <div id="debitAccountNumberIndicator">
+                                                <label class="requiredred" for="DebitAccountNumberIndicator">Debit Account Number Indicator:</label> <input type="text" id="DebitAccountNumberIndicator" name="DebitAccountNumberIndicator" />
+                                            </div>
+                                            <div id="debitAmount">
+                                                <label class="requiredred" for="DebitAmount">Debit Amount:</label> <input type="text" id="DebitAmount" name="DebitAmount" />
+                                            </div>
+                                            <div id="debitCVN">
+                                                <label class="optional" for="DebitCVN">Debit CVN:</label> <input type="text" id="DebitCVN" name="DebitCVN" />
+                                            </div>
+                                            <div id="debitExpirationMMYY">
+                                                <label class="optional" for="DebitExpirationMMYY">Debit Expiration MMYY:</label> <input type="text" id="DebitExpirationMMYY" name="DebitExpirationMMYY" />
+                                            </div>
+                                            <div id="debitSource">
+                                                <label class="requiredred" for="DebitSource">Debit Source:</label> <input type="text" id="DebitSource" name="DebitSource" />
+                                            </div>
+                                            <div id="encryptionBlock">
+                                                <label class="optional" for="EncryptionBlock">Encryption Block</label> <input type="text" id="EncryptionBlock" name="EncryptionBlock" />
+                                            </div>
+                                            <div id="encryptionTarget">
+                                                <label class="optional" for="EncryptionTarget">Encryption Target</label> <input type="text" id="EncryptionTarget" name="EncryptionTarget" />
+                                            </div>
                                             <div id="enrollmentID">
                                                 <label class="requiredred" for="EnrollmentID">Enrollment ID</label> <input type="number" id="EnrollmentID" name="EnrollmentID" />
+                                            </div>
+                                            <div id="keySerialNumberData">
+                                                <label class="requiredred" for="KeySerialNumberData">Key Serial Number Data</label> <input type="number" id="KeySerialNumberData" name="KeySerialNumberData" />
+                                            </div>
+                                            <div id="last4SSN">
+                                                <label class="optional" for="Last4SSN">Last 4 SSN:</label> <input type="text" id="Last4SSN" name="Last4SSN" />
                                             </div>
                                             <div id="isTempToken">
                                                 <label class="requiredred" for="IsTempToken">Is Temp Token</label> <input type="checkbox" id="IsTempToken" name="IsTempToken" value="true" />
@@ -134,6 +233,18 @@ and open the template in the editor.
                                             <div id="merchantDeviceDescriptor">
                                                 <label class="optional" for="MerchantDeviceDescriptor">Merchant Device Descriptor:</label> <input type="text" id="MerchantDeviceDescriptor" name="MerchantDeviceDescriptor" />
                                             </div>
+                                            <div id="merchantRoutingID">
+                                                <label class="optional" for="MerchantRoutingID">Merchant Routing ID:</label> <input type="text" id="MerchantRoutingID" name="MerchantRoutingID" />
+                                            </div>
+                                            <div id="monthOfBirth">
+                                                <label class="optional" for="MonthOfBirth">Month of Birth:</label> <input type="text" id="MonthOfBirth" name="MonthOfBirth" />
+                                            </div>
+                                            <div id="originalAuthorizationID">
+                                                <label class="optional" for="OriginalAuthorizationID">Original Authorization ID:</label> <input type="text" id="OriginalAuthorizationID" name="OriginalAuthorizationID" />
+                                            </div>
+                                            <div id="partnerCustomerKey">
+                                                <label class="optional" for="PartnerCustomerKey">Partner Customer Key:</label> <input type="text" id="PartnerCustomerKey" name="PartnerCustomerKey" />
+                                            </div>                                            
                                             <div id="password">
                                                 <label class="requiredred" for="Password">Password:</label> <input type="text" id="Password" name="Password" />
                                             </div>
@@ -146,17 +257,32 @@ and open the template in the editor.
                                             <div id="paymentDescriptor">
                                                 <label class="optional" for="PaymentDescriptor">Payment Descriptor:</label> <input type="text" id="PaymentDescriptor" name="PaymentDescriptor" />
                                             </div>
-                                            <div id="recurringPaymentType">
-                                                <label class="requiredred" for="RecurringPaymentType">Recurring Payment Type:</label> <input type="text" id="RecurringPaymentType" name="RecurringPaymentType" />
+                                            <div id="paymentID">
+                                                <label class="requiredred" for="PaymentID">Payment ID:</label> <input type="text" id="PaymentID" name="PaymentID" />
+                                            </div>
+                                            <div id="pinAuthCapability">
+                                                <label class="requiredred" for="PinAuthCapability">PIN Auth Capability:</label> <input type="text" id="PinAuthCapability" name="PinAuthCapability" />
+                                            </div>
+                                            <div id="pinData">
+                                                <label class="requiredred" for="PinData">PIN Data:</label> <input type="text" id="PinData" name="PinData" />
+                                            </div>
+                                            <div id="posEntryMode">
+                                                <label class="requiredred" for="PosEntryMode">POS Entry Mode:</label> <input type="text" id="PosEntryMode" name="PosEntryMode" />
                                             </div>
                                             <div id="recurringPaymentStartDate">
                                                 <label class="requiredred" for="RecurringPaymentStartDate">Recurring Payment Start Date:</label> <input type="text" id="RecurringPaymentStartDate" name="RecurringPaymentStartDate" />
                                             </div>
-                                            <div id="reportRequestDate">
-                                                <label class="requiredred" for="ReportRequestDate">Report Request Date:</label> <input type="date" id="ReportRequestDate" name="ReportRequestDate" />
+                                            <div id="recurringPaymentType">
+                                                <label class="requiredred" for="RecurringPaymentType">Recurring Payment Type:</label> <input type="text" id="RecurringPaymentType" name="RecurringPaymentType" />
+                                            </div>
+                                            <div id="refundAmount">
+                                                <label class="requiredred" for="RefundAmount">Refund Amount:</label> <input type="text" id="RefundAmount" name="RefundAmount" />
                                             </div>
                                             <div id="reportID">
                                                 <label class="requiredred" for="ReportID">Report ID:</label> <input type="text" id="ReportID" name="ReportID" />
+                                            </div>
+                                            <div id="reportRequestDate">
+                                                <label class="requiredred" for="ReportRequestDate">Report Request Date:</label> <input type="date" id="ReportRequestDate" name="ReportRequestDate" />
                                             </div>
                                             <div id="riskInformation">
                                                 <label class="optional" for="RiskInformation">Risk Information Blob</label> <input type="text" id="RiskInformation" name="RiskInformation" />
@@ -167,27 +293,30 @@ and open the template in the editor.
                                             <div id="storeCard">
                                                 <label class="optional" for="StoreCard">Store Card:</label> <input type="checkbox" id="StoreCard" name="StoreCard" value="true"/>
                                             </div>
-                                            <div id="type">
-                                                <label class="requiredred" for="Type">Type:</label> <input type="text" id="Type" name="Type" />
+                                            <div id="storeCheckAccount">
+                                                <label class="optional" for="StoreCheckAccount">Store Check Account:</label> <input type="checkbox" id="StoreCheckAccount" name="StoreCheckAccount" value="true"/>
+                                            </div>
+                                            <div id="terminalEntryCapability">
+                                                <label class="requiredred" for="TerminalEntryCapability">Terminal Entry Capability:</label> <input type="text" id="TerminalEntryCapability" name="TerminalEntryCapability" />
+                                            </div>
+                                            <div id="terminalID">
+                                                <label class="requiredred" for="TerminalID">Terminal ID:</label> <input type="text" id="TerminalID" name="TerminalID" />
                                             </div>
                                             <div id="transactionID">
                                                 <label class="requiredred" for="TransactionID">Transaction ID:</label> <input type="text" id="TransactionID" name="TransactionID" />
                                             </div>
-                                            <div id="webSessionID">
-                                                <label class="optional" for="WebSessionID">Web Session ID:</label> <input type="text" id="WebSessionID" name="WebSessionID" />
-                                            </div>
-                                            <div id="refundAmount">
-                                                <label class="requiredred" for="RefundAmount">Refund Amount:</label> <input type="text" id="RefundAmount" name="RefundAmount" />
-                                            </div>
-                                            <div id="createdByUser">
-                                                <label class="optional" for="CreatedByUser">Created by User:</label> <input type="text" id="CreatedByUser" name="CreatedByUser" />
-                                            </div>
-                                            <div id="paymentID">
-                                                <label class="requiredred" for="PaymentID">Payment ID:</label> <input type="text" id="PaymentID" name="PaymentID" />
+                                            <div id="type">
+                                                <label class="requiredred" for="Type">Type:</label> <input type="text" id="Type" name="Type" />
                                             </div>
                                             <div id="walletID">
                                                 <label class="requiredred" for="WalletID">Wallet ID:</label> <input type="number" id="WalletID" name="WalletID" />
                                             </div>                    
+                                            <div id="webSessionID">
+                                                <label class="optional" for="WebSessionID">Web Session ID:</label> <input type="text" id="WebSessionID" name="WebSessionID" />
+                                            </div>
+                                            <div id="yearOfBirth">
+                                                <label class="optional" for="YearOfBirth">Year of Birth:</label> <input type="text" id="YearOfBirth" name="YearOfBirth" />
+                                            </div>
                                         </div>
                                     </fieldset>
                                     <TABLE BORDER="1" WIDTH="900px" >
@@ -209,9 +338,7 @@ and open the template in the editor.
                         </td>
                     </tr>
                 </TABLE>
-
             </div>
-
         </div>
         <script type="text/javascript">
             function Reset_Form() {
@@ -219,21 +346,19 @@ and open the template in the editor.
                 document.getElementById("form1").reset();
             }
         </script>
-                <script type="text/javascript">
-            function updateRequiredFields(element) {
-                console.log('Change Required Fields based on indemnification1 ');
-//                 $("label[for='" + this.id + "']").toggleClass('requiredred', element.checked);
-//                $( element ).parent().toggleClass( 'requiredred', element.checked );
-//                    element.checked ? document.getElementById("riskInformation").disabled = true : document.getElementById("riskInformation").disabled = false; 
-//                    element.checked ? $("#riskInformation").toggleClass("requiredred", element.checked) : $("#riskInformation").toggleClass("optional", element.checked);
-                   element.checked ? $("#RiskInformation").toggleClass("requiredred") : $("#RiskInformation").toggleClass("optional");
-               document.getElementById('container1').style.display = "block";
-            }
-        </script>
         <script type="text/javascript">
             function handleSelection(choice) {
                 console.log('What was selected: ' + choice);
-                if (choice === 'ChallengeQuestionAnswer') {
+                if (choice === 'BankAccountToTemporaryToken') {
+                    console.log('Inside BankAccountToTemporaryToken');
+                    $(".hidden > *").css('display', 'none');
+
+                    $("#accountName").show();
+                    $("#checkAccountNumber").show();
+
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'ChallengeQuestionAnswer') {
                     $(".hidden > *").css('display', 'none');
                     $("#accountName").show();
                     $("#answerNumber").show();
@@ -248,8 +373,12 @@ and open the template in the editor.
                     $(".hidden > *").css('display', 'none');
 
                     $("#accountName").show();
-                    $("#paymentID").show();
+                    $("#dayOfBirth").show();
+                    $("#last4SSN").show();
+                    $("#monthOfBirth").show();
                     $("#password").show();
+                    $("#paymentID").show();
+                    $("#yearOfBirth").show();
 
                     document.getElementById('container1').style.display = "block";
                 }
@@ -265,41 +394,45 @@ and open the template in the editor.
                 else if (choice === 'ChargeAuthorize')
                 {
                     $(".hidden > *").css('display', 'none');
-                    $("#transactionID").show();
-                    $("#webSessionID").show();
-                    $("#paymentDescriptor").show();
-                    $("#riskInformation").show();
-                    $("#storeCard").show();
-                    $("#password").show();
-                    $("#chargeExpirationMMYY").show();
-                    $("#chargeSource").show();
-                    $("#isTempToken").show();
-                    $("#chargeAccountNumberToken").show();
-                    $("#chargeAccountNumber").show();
-                    $("#chargeAccountNumberIndicator").show();
-                    $("#chargeAmount").show();
-                    $("#chargeCVN").show();
+                    $("#accountName").show();
+                    $("#additionalAmount").show();
+                    $("#additionalAmountType").show();
                     $("#cardHolderAddressLine1").show();
                     $("#cardHolderAddressLine2").show();
                     $("#cardHolderCity").show();
                     $("#cardHolderCountryCode").show();
-                    $("#cardHolderLastName").show();
                     $("#cardHolderFirstName").show();
+                    $("#cardHolderLastName").show();
                     $("#cardHolderPostalCode").show();
                     $("#cardHolderRegion").show();
-                    $("#accountName").show();
+                    $("#chargeAccountNumber").show();
+                    $("#chargeAccountNumberIndicator").show();
+                    $("#chargeAccountNumberToken").show();
+                    $("#chargeAmount").show();
+                    $("#chargeCVN").show();
+                    $("#chargeExpirationMMYY").show();
                     $("#chargeSale").show();
+                    $("#chargeSource").show();
+                    $("#isTempToken").show();
+                    $("#merchantRoutingID").show();
+                    $("#partnerCustomerKey").show();
+                    $("#password").show();
+                    $("#paymentDescriptor").show();
+                    $("#riskInformation").show();
+                    $("#storeCard").show();
+                    $("#transactionID").show();
+                    $("#webSessionID").show();
 
                     document.getElementById('container1').style.display = "block";
                 }
                 else if (choice === 'ChargeConfirm')
                 {
                     $(".hidden > *").css('display', 'none');
-                    $("#transactionID").show();
-                    $("#password").show();
-                    $("#chargeAmount").show();
                     $("#accountName").show();
+                    $("#chargeAmount").show();
+                    $("#password").show();
                     $("#paymentID").show();
+                    $("#transactionID").show();
 
                     document.getElementById('container1').style.display = "block";
                 }
@@ -309,17 +442,20 @@ and open the template in the editor.
 
                     $("#accountName").show();
                     $("#chargeAccountNumber").show()
-                    $("#chargeAccountNumberIndicator").show();;
+                    $("#chargeAccountNumberIndicator").show();
+                    $("#encryptionBlock").show();
+                    $("#encryptionTarget").show();
+                    $("#merchantRoutingID").show();
                     $("#password").show();
-                    $("#isTempToken").show();
-                    $("#chargeAccountNumberToken").show();
                     document.getElementById('container1').style.display = "block";
                 }
-                else if (choice === 'ChargeSale' || choice === 'TokenOneStep')
+                else if (choice === 'ChargeSale')
                 {
                     console.log('Inside ChargeSale');
                     $(".hidden > *").css('display', 'none');
                     $("#accountName").show();
+                    $("#additionalAmount").show();
+                    $("#additionalAmountType").show();
                     $("#cardHolderAddressLine1").show();
                     $("#cardHolderAddressLine2").show();
                     $("#cardHolderCity").show();
@@ -334,9 +470,11 @@ and open the template in the editor.
                     $("#chargeAmount").show();
                     $("#chargeCVN").show();
                     $("#chargeSale").show();
-                    $("#chargeSource").show();
                     $("#chargeExpirationMMYY").show();
-                    $("#isTempToken").show();
+                    $("#chargeSource").show();
+                    $("#createdByUser").show();
+                    $("#merchantRoutingID").show();
+                    $("#partnerCustomerKey").show();
                     $("#password").show();
                     $("#paymentDescriptor").show();
                     $("#riskInformation").show();
@@ -353,6 +491,188 @@ and open the template in the editor.
                     $("#password").show();
                     $("#reportID").show();
 
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'CheckSale')
+                {
+                    console.log('Inside CheckSale');
+                    $(".hidden > *").css('display', 'none');
+                    $("#accountName").show();
+                    $("#bankRoutingNumber").show();
+                    $("#checkAccountNumber").show();
+                    $("#checkAccountNumberIndicator").show();
+                    $("#checkAmount").show();
+                    $("#checkHolderAddressLine1").show();
+                    $("#checkHolderAddressLine2").show();
+                    $("#checkHolderCity").show();
+                    $("#checkHolderCompanyName").show();
+                    $("#checkHolderCountryCode").show();
+                    $("#checkHolderDateOfBirth").show();
+                    $("#checkHolderFirstName").show();
+                    $("#checkHolderLastName").show();
+                    $("#checkHolderPhoneNumber").show();
+                    $("#checkHolderPostalCode").show();
+                    $("#checkHolderRegion").show();
+                    $("#checkNumber").show();
+                    $("#checkSource").show();
+                    $("#checkType").show();
+                    $("#merchantRoutingID").show();
+                    $("#partnerCustomerKey").show();
+                    $("#password").show();
+                    $("#paymentDescriptor").show();
+                    $("#riskInformation").show();
+                    $("#storeCheckAccount").show();
+                    $("#transactionID").show();
+                    $("#webSessionID").show();
+
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'CPChargeSale')
+                {
+                    console.log('Inside CPChargeSale');
+                    $(".hidden > *").css('display', 'none');
+                    $("#accountName").show();
+                    $("#additionalAmount").show();
+                    $("#additionalAmountType").show();
+                    $("#cardHolderAddressLine1").show();
+                    $("#cardHolderAddressLine2").show();
+                    $("#cardHolderCity").show();
+                    $("#cardHolderCountryCode").show();
+                    $("#cardHolderFirstName").show();
+                    $("#cardHolderLastName").show();
+                    $("#cardHolderPostalCode").show();
+                    $("#cardHolderRegion").show();
+                    $("#cardTrack1Data").show();
+                    $("#cardTrack2Data").show();
+                    $("#cardTypeIndicator").show();
+                    $("#chargeAccountNumber").show();
+                    $("#chargeAccountNumberIndicator").show();
+                    $("#chargeAmount").show();
+                    $("#chargeCVN").show();
+                    $("#chargeExpirationMMYY").show();
+                    $("#encryptionBlock").show();
+                    $("#encryptionTarget").show();
+                    $("#merchantRoutingID").show();
+                    $("#originalAuthorizationID").show();
+                    $("#partnerCustomerKey").show();
+                    $("#password").show();
+                    $("#paymentDescriptor").show();
+                    $("#pinAuthCapability").show();
+                    $("#posEntryMode").show();
+                    $("#riskInformation").show();
+                    $("#storeCard").show();
+                    $("#terminalEntryCapability").show();
+                    $("#terminalID").show();
+                    $("#transactionID").show();
+
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'CPDebitSale')
+                {
+                    console.log('Inside CPDebitSale');
+                    $(".hidden > *").css('display', 'none');
+                    $("#accountName").show();
+                    $("#additionalAmount").show();
+                    $("#additionalAmountType").show();
+                    $("#cardHolderAddressLine1").show();
+                    $("#cardHolderAddressLine2").show();
+                    $("#cardHolderCity").show();
+                    $("#cardHolderCountryCode").show();
+                    $("#cardHolderFirstName").show();
+                    $("#cardHolderLastName").show();
+                    $("#cardHolderPostalCode").show();
+                    $("#cardHolderRegion").show();
+                    $("#cardTrack2Data").show();
+                    $("#cardTypeIndicator").show();
+                    $("#debitAccountNumber").show();
+                    $("#debitAccountNumberIndicator").show();
+                    $("#debitAmount").show();
+                    $("#debitExpirationMMYY").show();
+                    $("#encryptionBlock").show();
+                    $("#encryptionTarget").show();
+                    $("#keySerialNumberData").show();
+                    $("#merchantRoutingID").show();
+                    $("#originalAuthorizationID").show();
+                    $("#partnerCustomerKey").show();
+                    $("#password").show();
+                    $("#paymentDescriptor").show();
+                    $("#pinAuthCapability").show();
+                    $("#pinData").show();
+                    $("#posEntryMode").show();
+                    $("#riskInformation").show();
+                    $("#storeCard").show();
+                    $("#terminalEntryCapability").show();
+                    $("#terminalID").show();
+                    $("#transactionID").show();
+
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'CPReversePayment') {
+                    console.log('Inside Card Present ReversePayment');
+                    $(".hidden > *").css('display', 'none');
+                    $("#accountName").show();
+                    $("#amount").show();
+                    $("#cardTrack1Data").show();
+                    $("#cardTrack2Data").show();
+                    $("#cardTypeIndicator").show();
+                    $("#chargeAccountNumber").show();
+                    $("#chargeAccountNumberIndicator").show();
+                    $("#chargeExpirationMMYY").show();
+                    $("#encryptionBlock").show();
+                    $("#encryptionTarget").show();
+                    $("#keySerialNumberData").show();
+                    $("#merchantRoutingID").show();
+                    $("#password").show();
+                    $("#paymentDescriptor").show();
+                    $("#pinAuthCapability").show();
+                    $("#pinData").show();
+                    $("#posEntryMode").show();
+                    $("#terminalEntryCapability").show();
+                    $("#terminalID").show();
+                    $("#transactionID").show();
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'CPSaleComplete')
+                {
+                    $(".hidden > *").css('display', 'none');
+
+                    $("#accountName").show();
+                    $("#originalAuthorizationID").show();
+                    $("#password").show();
+                    $("#paymentID").show();
+                    $("#terminalID").show();
+                    $("#transactionID").show();
+
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'DebitSale') {
+                    $(".hidden > *").css('display', 'none');
+
+                    $("#accountName").show();
+                    $("#cardHolderAddressLine1").show();
+                    $("#cardHolderAddressLine2").show();
+                    $("#cardHolderCity").show();
+                    $("#cardHolderCountryCode").show();
+                    $("#cardHolderFirstName").show();
+                    $("#cardHolderLastName").show();
+                    $("#cardHolderPostalCode").show();
+                    $("#cardHolderRegion").show();
+                    $("#createdByUser").show();
+                    $("#debitAccountNumber").show();
+                    $("#debitAccountNumberIndicator").show();
+                    $("#debitAmount").show();
+                    $("#debitCVN").show();
+                    $("#debitExpirationMMYY").show();
+                    $("#debitSource").show();
+                    $("#merchantRoutingID").show();
+                    $("#partnerCustomerKey").show();
+                    $("#password").show();
+                    $("#paymentDescriptor").show();
+                    $("#riskInformation").show();
+                    $("#storeCard").show();
+                    $("#transactionID").show();
+                    $("#webSessionID").show();
+                    
                     document.getElementById('container1').style.display = "block";
                 }
                 else if (choice === 'DownloadReportFile') {
@@ -378,8 +698,8 @@ and open the template in the editor.
 
                     $("#accountName").show();
                     $("#password").show();
-                    $("#transactionID").show();
                     $("#paymentID").show();
+                    $("#transactionID").show();
 
                     document.getElementById('container1').style.display = "block";
                 }
@@ -411,8 +731,35 @@ and open the template in the editor.
                     $("#cardHolderRegion").show();
                     $("#chargeAccountNumber").show();
                     $("#chargeAccountNumberIndicator").show();
+                    $("#chargeCVN").show();
                     $("#chargeExpirationMMYY").show();
                     $("#merchantDeviceDescriptor").show();
+                    $("#merchantRoutingID").show();
+                    $("#password").show();
+                    $("#walletID").show();
+
+                    document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'PaymentDeviceCheckRegister') {
+                    $(".hidden > *").css('display', 'none');
+                    $("#accountName").show();
+                    $("#bankRoutingNumber").show();
+                    $("#checkAccountNumber").show();
+                    $("#checkAccountNumberIndicator").show();
+                    $("#checkHolderAddressLine1").show();
+                    $("#checkHolderAddressLine2").show();
+                    $("#checkHolderCity").show();
+                    $("#checkHolderCompanyName").show();
+                    $("#checkHolderCountryCode").show();
+                    $("#checkHolderDateOfBirth").show();
+                    $("#checkHolderFirstName").show();
+                    $("#checkHolderLastName").show();
+                    $("#checkHolderPhoneNumber").show();
+                    $("#checkHolderPostalCode").show();
+                    $("#checkHolderRegion").show();
+                    $("#checkType").show();
+                    $("#merchantDeviceDescriptor").show();
+                    $("#merchantRoutingID").show();
                     $("#password").show();
                     $("#walletID").show();
 
@@ -430,12 +777,35 @@ and open the template in the editor.
                     $("#cardHolderPostalCode").show();
                     $("#cardHolderRegion").show();
                     $("#chargeExpirationMMYY").show();
+                    $("#merchantDeviceDescriptor").show();
                     $("#password").show();
                     $("#paymentDeviceOnFileID").show();
                     $("#walletID").show();
 
                     document.getElementById('container1').style.display = "block";
+                }
+                else if (choice === 'PaymentDeviceCheckUpdate') {
+                    $(".hidden > *").css('display', 'none');
+                    $("#accountName").show();
+                    $("#checkCompanyName").show();
+                    $("#checkHolderAddressLine1").show();
+                    $("#checkHolderAddressLine2").show();
+                    $("#checkHolderCity").show();
+                    $("#checkHolderCountryCode").show();
+                    $("#checkHolderDateOfBirth").show();
+                    $("#checkHolderFirstName").show();
+                    $("#checkHolderLastName").show();
+                    $("#checkHolderPhoneNumber").show();
+                    $("#checkHolderPostalCode").show();
+                    $("#checkHolderRegion").show();
+                    $("#chargeExpirationMMYY").show();
+                    $("#merchantDeviceDescriptor").show();
+                    $("#merchantRoutingID").show();
+                    $("#password").show();
+                    $("#paymentDeviceOnFileID").show();
+                    $("#walletID").show();
 
+                    document.getElementById('container1').style.display = "block";
                 }
                 else if (choice === 'PaymentDeviceOnFileRemove') {
                     $(".hidden > *").css('display', 'none');
@@ -507,15 +877,29 @@ and open the template in the editor.
                     $("#transactionID").show();
                     document.getElementById('container1').style.display = "block";
                 }
+                else if (choice === 'ReverseCheckPayment') {
+                    console.log('Inside ReverseCheckPayment');
+                    $(".hidden > *").css('display', 'none');
+                    $("#accountName").show();
+                    $("#password").show();
+                    $("#paymentID").show();
+                    $("#refundAmount").show();
+                    $("#transactionID").show();
+                    document.getElementById('container1').style.display = "block";
+                }
                 else if (choice === 'ReversePayment') {
                     console.log('Inside ReversePayment');
                     $(".hidden > *").css('display', 'none');
                     $("#accountName").show();
+                    $("#chargeAccountNumber").show();
+                    $("#chargeAccountNumberIndicator").show();
+                    $("#chargeExpirationMMYY").show();
+                    $("#merchantRoutingID").show();
+                    $("#partnerCustomerKey").show();
                     $("#password").show();
-                    $("#createdByUser").show();
-                    $("#transactionID").show();
                     $("#paymentID").show();
                     $("#refundAmount").show();
+                    $("#transactionID").show();
                     document.getElementById('container1').style.display = "block";
                 }
                 else if (choice === 'TokenTwoStep') {
@@ -548,11 +932,13 @@ and open the template in the editor.
                     $("#cardHolderLastName").show();
                     $("#cardHolderPostalCode").show();
                     $("#cardHolderRegion").show();
-                    $("#chargeAccountNumberToken").show();
+                    $("#chargeAccountNumber").show();
+                    $("#chargeAccountNumberIndicator").show();
                     $("#chargeCVN").show();
-                    $("#chargeSource").show();
                     $("#chargeExpirationMMYY").show();
-                    $("#isTempToken").show();
+                    $("#chargeSource").show();
+                    $("#merchantRoutingID").show();
+                    $("#partnerCustomerKey").show();
                     $("#password").show();
                     $("#paymentDescriptor").show();
                     $("#storeCard").show();
@@ -565,6 +951,7 @@ and open the template in the editor.
                 else if (choice === 'WalletCreate') {
                     $(".hidden > *").css('display', 'none');
                     $("#accountName").show();
+                    $("#partnerCustomerKey").show();
                     $("#password").show();
 
                     document.getElementById('container1').style.display = "block";
@@ -573,6 +960,7 @@ and open the template in the editor.
                     $(".hidden > *").css('display', 'none');
 
                     $("#accountName").show();
+                    $("#partnerCustomerKey").show();
                     $("#password").show();
                     $("#walletID").show();
 

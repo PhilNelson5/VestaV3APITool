@@ -1,30 +1,18 @@
 <!DOCTYPE html>
 <?php
 require('helpers.php');
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Account Information for Service Delivery:
+//AccountName            : Service_Delivery_NonIndemnified
+//PartnerCD                    : 220
+//Password                     : Password1
+//
+//AccountName            : Service_Delivery_Indemnified
+//PartnerCD                    : 221
+//Password                     : Password1
+//
+//GatewayV3Proxy	http://vsafe.psgocu01f.uat.tgd:8080/GatewayV3Proxy/Service/ 
+//GatewayV3ProxyJSON	http://vsafe.psgocu01f.uat.tgd:8181/GatewayV3ProxyJSON/Service/
 
-//Time out response                     4002432198795432
-//Successful transaction                4200123456719012
-//pended transaction                    4628610683834808
-//  <ShoppingCart xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></ShoppingCart>
-//    'ChargeAccountNumber'            => 4002432198795432
-//    PERSONAL ACCOUNT
-//    'AccountName'              => BcI/eAaBXWvNozS3xMK5kw==
-//    'Password'                 => WNkDUagtVq6w+37jmkcIzXjFGZ27pnp74GzCXcBi3OmH35zrXkNs6/lSaW2n1vx9
-//    
-//    VESTA ACCOUNT
-//    'AccountName'              => c91yKKKHf+rCSzgwdeuD9g==
-//    'Password'                 => HTp+CKx137DjQ/ojL+beveq0wWvrwJnsvxjuV/TMz8ue3kGyA5WIAGlkIGVl2J88
-//                              "WalletID":"188"
-//                              temp token: 4200800000009384
-//                               PHP: Success in RecurringPaymentEnroll {"AVSResultCode":"11","CVNResultCode":"17","ChargePermanentToken":"4200900000000035","EnrollmentID":"768","EnrollmentStatus":"1","PaymentAcquirerName":"Chase Paymentech","PaymentID":"3KVVR0YSW","PaymentStatus":"10","ProxiedMessageName":"RecurringPaymentEnroll","ResponseCode":"0"} 
-//    
-//AccountName=>"pZ8H7jvp98+bR7vyskYLsA==“, 
-//Password=>"lJKC1an4pEKHPMiko7lCI9au/8m4hasy3R0hqYElqIUZ19IdGYSaL96pKJyHIUci”
 //Strip empty tags from array because sandbox runs validation on these even if they are empty
 $_POST = array_filter($_POST);
 
@@ -220,7 +208,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionAn
 }
 
 function getSessionTags($_DATA) {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/GetSessionTags';
+    $url = 'http://vsafe.psgocu01f.uat.tgd:8080/GatewayV3Proxy/Service/GetSessionTags';
 
     $payload = array(
         'TransactionID' => $_DATA['TransactionID'],
