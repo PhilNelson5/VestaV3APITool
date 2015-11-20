@@ -15,8 +15,10 @@ require('helpers.php');
 
 //Strip empty tags from array because sandbox runs validation on these even if they are empty
 $_POST = array_filter($_POST);
-
-if (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionAnswer") {
+if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTemporaryToken") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionAnswer") {
     $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChallengeQuestionAnswer';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionBegin") {
@@ -38,6 +40,24 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionAn
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CheckReportStatus") {
     $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/CheckReportStatus';
     executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CheckSale") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CPChargeSale") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CPDebitSale") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CPReversePayment") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CPSaleComplete") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "DebitSale") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "DownloadReportFile") {
     $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/DownloadReportFile';
     executeAPICall($_POST, $url, $_POST["api_method"]);
@@ -58,6 +78,12 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionAn
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceChargeUpdate") {
     $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/PaymentDeviceChargeUpdate';
     executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceCheckRegister") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceCheckUpdate") {
+    $url = '';
+    executeAPICall($_POST, $url, $_POST["api_method"]); 
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceOnFileRemove") {
     $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/PaymentDeviceOnFileRemove';
     executeAPICall($_POST, $url, $_POST["api_method"]);
@@ -108,6 +134,9 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionAn
     }
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ReversePayment") {
     $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ReversePayment';
+    executeAPICall($_POST, $url, $_POST["api_method"]);
+} elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ReverseCheckPayment") {
+    $url = '';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "TestCurl") {
     //THIS WAS TRYING TO USE CURL AND I COULDN'T GET IT TO WORK
