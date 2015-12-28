@@ -9,36 +9,63 @@ require('helpers.php');
 //AccountName            : Service_Delivery_Indemnified
 //PartnerCD                    : 221
 //Password                     : Password1
+//WalletID  80400113
 //
-//GatewayV3Proxy	http://vsafe.psgocu01f.uat.tgd:8080/GatewayV3Proxy/Service/ 
-//GatewayV3ProxyJSON	http://vsafe.psgocu01f.uat.tgd:8181/GatewayV3ProxyJSON/Service/
+//AccountName: csgoshop_test
+//AccountName: telcel_test
+//Visa Successful       4001414208480156     E5XQI5O9  E5XQI5PQ  EF4HXFRL
+//Pend need year EF5AQTEV
+//pend time out EF5AQTEW
+//Visa CVN mismantch    4001420771215028
+//Visa Debit sale successful    4200101372721718
+//Visa Insufficient Funds   4614157022664880
+//Mastercard account closed   5105783760057400
+//Mastercard insufficient funds     5101154721341453
+//<ShoppingCart xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></ShoppingCart>
+//your test accounts have an identical MerchantRouting configuration.  
+//PaymentType	AcquirerCD	MerchantRoutingKey
+//CC Credit	14                  1414
+//CC Refund	14                  1414
+//DC Credit	14                  1414
+//DC Refund	14                  1414
+//eCheck/ACH	21                  2121
+//Check Refund	21                  2121
+//CP Credit Sale	20          2020
+//CP Credit Refund	20          2020
+//CP Debit Sale         20          2020
+//CP Debit Refund	20          2020
+
+//
+//$GatewayV3Proxy = "https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/";
+//$GatewayV3ProxyJSON = "https://vsafeecl3.ecustomersupport.com:6060/GatewayV3ProxyJSON/Service/";
+
 
 //Strip empty tags from array because sandbox runs validation on these even if they are empty
 $_POST = array_filter($_POST);
 if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTemporaryToken") {
-    $url = '';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/BankAccountToTemporaryToken';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionAnswer") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChallengeQuestionAnswer';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChallengeQuestionAnswer';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChallengeQuestionBegin") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChallengeQuestionBegin';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChallengeQuestionBegin';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChargeAccountToTemporaryToken") {
     getToken($_POST);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChargeAuthorize") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeAuthorize';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeAuthorize';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChargeConfirm") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeConfirm';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeConfirm';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChargeGetPaymentDeviceInfo") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeGetPaymentDeviceInfo';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeGetPaymentDeviceInfo';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ChargeSale") {
     callChargeSale($_POST);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CheckReportStatus") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/CheckReportStatus';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/CheckReportStatus';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CheckSale") {
     $url = '';
@@ -56,27 +83,27 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
     $url = '';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "DebitSale") {
-    $url = '';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/DebitSale';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "DownloadReportFile") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/DownloadReportFile';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/DownloadReportFile';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "GenerateReport") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/GenerateReport';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/GenerateReport';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "GetPaymentStatus") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/GetPaymentStatus';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/GetPaymentStatus';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "GetSessionTags") {
     getSessionTags($_POST);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "HeartBeat") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/HeartBeat';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/HeartBeat';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceChargeRegister") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/PaymentDeviceChargeRegister';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/PaymentDeviceChargeRegister';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceChargeUpdate") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/PaymentDeviceChargeUpdate';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/PaymentDeviceChargeUpdate';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceCheckRegister") {
     $url = '';
@@ -85,19 +112,19 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
     $url = '';
     executeAPICall($_POST, $url, $_POST["api_method"]); 
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceOnFileRemove") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/PaymentDeviceOnFileRemove';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/PaymentDeviceOnFileRemove';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "RecurringPaymentEnroll") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/RecurringPaymentEnroll';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/RecurringPaymentEnroll';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "RecurringPaymentEnrollStatus") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/RecurringPaymentEnrollmentStatus';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/RecurringPaymentEnrollmentStatus';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "RecurringPaymentStatus") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/RecurringPaymentStatus';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/RecurringPaymentStatus';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "RecurringPaymentUnenroll") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/RecurringPaymentUnEnroll';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/RecurringPaymentUnEnroll';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "Refund") {
     //create ChargeSale Transaction as basis for refund
@@ -118,7 +145,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
     if ($Sale_Result['PaymentStatus'] == 10) {
         //we have a successful sale to refund a payment on
 
-        $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ReversePayment';
+        $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ReversePayment';
         $payload = array(
             'AccountName' => $post_data['AccountName'],
             'ChargeAmount' => $post_data['ChargeAmount'],
@@ -133,7 +160,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
         debug_to_console("Refund error, ChargeSale call failed", $Sale_Result);
     }
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ReversePayment") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ReversePayment';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ReversePayment';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ReverseCheckPayment") {
     $url = '';
@@ -150,8 +177,8 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
 
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeAccountToTemporaryToken';
-    curl_setopt($curl, CURLOPT_URL, "https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeAccountToTemporaryToken/");
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeAccountToTemporaryToken';
+    curl_setopt($curl, CURLOPT_URL, "https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeAccountToTemporaryToken/");
     curl_setopt($curl, CURLOPT_HEADER, 0);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
 //  curl_setopt ($curl, CURLOPT_CAINFO, "C:\xampp\htdocs\VestaAPISamples\cacert.pem");
@@ -187,7 +214,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
 
     $_POST['ChargeAccountNumberToken'] = $newToken;
     $post_data = populateDefaultData($_POST);
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeAuthorize';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeAuthorize';
     debug_to_console('Token Two Step call ChargeAuthorize:', $_POST);
     $call_response = executeAPICall($post_data, $url, $_POST["api_method"]);
     debug_to_console('Token Two Step response from authorize:', $call_response);
@@ -201,7 +228,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
             'PaymentID' => $call_response['PaymentID'],
             'TransactionID' => $post_data['TransactionID']
         );
-        $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeConfirm';
+        $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeConfirm';
         executeAPICall($payload, $url, $_POST["api_method"]);
     } else {
         debug_to_console('Something went wrong in two step authorize:', $call_response);
@@ -224,26 +251,28 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
     debug_to_console('Inside Token One Step with new Token:', $post_data);
     callChargeSale($post_data);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ValidateChargeAccount") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ValidateChargeAccount';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ValidateChargeAccount';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "WalletCreate") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/WalletCreate';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/WalletCreate';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "WalletList") {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/WalletList';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/WalletList';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } else {
     echo 'Im Sorry, Something has gone wrong';
 }
 
 function getSessionTags($_DATA) {
-    $url = 'http://vsafe.psgocu01f.uat.tgd:8080/GatewayV3Proxy/Service/GetSessionTags';
+    $url = "https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/GetSessionTags";
 
     $payload = array(
         'TransactionID' => $_DATA['TransactionID'],
         'AccountName' => $_DATA['AccountName'],
         'Password' => $_DATA['Password']
     );
+    
+    debug_to_console('Parameters Passed to getSessionTags:', $payload);
 
     $context = stream_context_create(array(
         'http' => array(
@@ -261,7 +290,7 @@ function getSessionTags($_DATA) {
     $error = null;
     if ($result['ResponseCode'] == 0) {
         debug_to_console('Successfully called GetSessionTags<br />', $result);
-        $fingerprintEndpoint = 'https://paysafesandbox.ecustomersupport.com/ThreatMetrixUIRedirector';
+        $fingerprintEndpoint = 'https://vsafeecl3.ecustomersupport.com:6060/ThreatMetrixUIRedirector';
         $embedHtml = sprintf('<p style="background:url(%1$s/fp/clear.png?org_id=%2$s&session_id=%3$s&m=1);"></p> <img src="%1$s/fp/clear.png?org_id=%2$s&session_id=%3$s&m=2" /> <script type="text/javascript" src="%1$s/fp/check.js?org_id=%2$s&session_id=%3$s"></script> <object data="%1$s/fp/fp.swf?org_id=%2$s&session_id=%3$s" type="application/x-shockwave-flash" width="1" height="1"> <param value="%1$s/fp/fp.swf?org_id=%2$s&session_id=%3$s" name="movie" /> </object>'
                 , $fingerprintEndpoint
                 , $result['OrgID']
@@ -286,7 +315,7 @@ function getToken($PostData) {
     debug_to_console('Only call with Accountname and Card Number:', $payload);
     $query = http_build_query($payload);
 
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeAccountToTemporaryToken';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeAccountToTemporaryToken';
     $context = stream_context_create(array(
         'http' => array(
             'method' => 'POST',
@@ -315,7 +344,8 @@ function getToken($PostData) {
 }
 
 function callChargeSale($_data) {
-    $url = 'https://paysafesandbox.ecustomersupport.com/GatewayProxy/Service/ChargeSale';
+    debug_to_console("Parameters passed to ChargeSale:", $_data);
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ChargeSale';
     $result = executeAPICall($_data, $url, $_data["api_method"]);
     return $result;
 }
@@ -329,7 +359,7 @@ function debug_to_console($message, $data) {
 }
 
 function executeAPICall($post_data, $url, $api) {
-//    debug_to_console("executeAPICall for $api", $post_data);  
+    debug_to_console("executeAPICall for $api", $post_data);  
     $query = http_build_query($post_data);
 
     $context = stream_context_create(array(
