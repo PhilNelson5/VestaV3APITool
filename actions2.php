@@ -68,7 +68,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
     $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/CheckReportStatus';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CheckSale") {
-    $url = '';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/CheckSale';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "CPChargeSale") {
     $url = '';
@@ -168,7 +168,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "TestCurl") {
     //THIS WAS TRYING TO USE CURL AND I COULDN'T GET IT TO WORK
     $post_data = array(
-        'ChargeAccountNumber' => $_POST['ChargeAccountNumberToken'],
+        'ChargeAccountNumber' => $_POST['ChargeAccountNumber'],
         'AccountName' => $_POST['AccountName']
     );
     debug_to_console('post_data<br />', $post_data);
@@ -290,7 +290,7 @@ function getSessionTags($_DATA) {
     $error = null;
     if ($result['ResponseCode'] == 0) {
         debug_to_console('Successfully called GetSessionTags<br />', $result);
-        $fingerprintEndpoint = 'https://vsafeecl3.ecustomersupport.com:6060/ThreatMetrixUIRedirector';
+        $fingerprintEndpoint = 'https://paysafe.ecustomerpayments.com/PaySafeUIRedirector';
         $embedHtml = sprintf('<p style="background:url(%1$s/fp/clear.png?org_id=%2$s&session_id=%3$s&m=1);"></p> <img src="%1$s/fp/clear.png?org_id=%2$s&session_id=%3$s&m=2" /> <script type="text/javascript" src="%1$s/fp/check.js?org_id=%2$s&session_id=%3$s"></script> <object data="%1$s/fp/fp.swf?org_id=%2$s&session_id=%3$s" type="application/x-shockwave-flash" width="1" height="1"> <param value="%1$s/fp/fp.swf?org_id=%2$s&session_id=%3$s" name="movie" /> </object>'
                 , $fingerprintEndpoint
                 , $result['OrgID']

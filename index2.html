@@ -10,9 +10,6 @@
         <div id="layout">
             <div id="header">Vesta V3 ECl Test API Tool</div>
             <div id="navbar">
-<!--                <div> 
-                    <input type="checkbox" name="indemnified" value="indemnified" onchange="updateRequiredFields(this)" checked> Indemnified?<br>
-                </div>-->
             </div>
             <div id="content">
                 <TABLE BORDER="1">
@@ -59,6 +56,9 @@
                                         <option value="ChargeGetPaymentDeviceInfo">Charge Get Payment Device Info</option>
                                         <option value="GetPaymentStatus">Get Payment Status</option>
                                         <option value="HeartBeat">HeartBeat</option>
+                                    </optgroup>
+                                    <optgroup label="CURL">
+                                        <option value="TestCurl">Test Curl Call</option>
                                     </optgroup>
                                 </select>
 
@@ -971,11 +971,5 @@
                 }
             }
         </script>
-        <p style="background:url(https://paysafe.ecustomerpayments.com/PaySafeUIRedirector/fp/clear.png?org_id={orgID}&session_id={webSessionID}&m=1);"></p>
-        <img src="https://paysafe.ecustomerpayments.com/PaySafeUIRedirector/fp/clear.png?org_id={orgID}&session_id={webSessionID}&m=2" />
-        <script type="text/javascript" src="https://paysafe.ecustomerpayments.com/PaySafeUIRedirector/fp/check.js?org_id={orgID}&session_id={webSessionID}"></script>
-        <object data="https://paysafe.ecustomerpayments.com/PaySafeUIRedirector/fp/fp.swf?org_id={orgID}&session_id={webSessionID}" type="application/x-shockwave-flash" width="1" height="1">
-            <param value="https://paysafe.ecustomerpayments.com/PaySafeUIRedirector/fp/fp.swf?org_id={orgID}&session_id={webSessionID}" name="movie" />
-        </object>
     </body>
 </html>
