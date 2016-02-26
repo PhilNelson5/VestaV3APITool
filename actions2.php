@@ -9,11 +9,11 @@ require('helpers.php');
 //AccountName            : Service_Delivery_Indemnified
 //PartnerCD                    : 221
 //Password                     : Password1
-//WalletID  80400113
+//WalletID  80400113   80500113
 //
 //AccountName: csgoshop_test
 //AccountName: telcel_test
-//Visa Successful       4001414208480156     E5XQI5O9  E5XQI5PQ  EF4HXFRL
+//Visa Successful       4001414208480156
 //Pend need year EF5AQTEV
 //pend time out EF5AQTEW
 //Visa CVN mismantch    4001420771215028
@@ -25,23 +25,17 @@ require('helpers.php');
 //your test accounts have an identical MerchantRouting configuration.  
 //PaymentType	AcquirerCD	MerchantRoutingKey
 //CC Credit	14                  1414
-//CC Refund	14                  1414
 //DC Credit	14                  1414
-//DC Refund	14                  1414
 //eCheck/ACH	21                  2121
-//Check Refund	21                  2121
 //CP Credit Sale	20          2020
-//CP Credit Refund	20          2020
 //CP Debit Sale         20          2020
-//CP Debit Refund	20          2020
-
 //
 //$GatewayV3Proxy = "https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/";
 //$GatewayV3ProxyJSON = "https://vsafeecl3.ecustomersupport.com:6060/GatewayV3ProxyJSON/Service/";
 
 
 //Strip empty tags from array because sandbox runs validation on these even if they are empty
-$_POST = array_filter($_POST);
+$_POST = array_filter( $_POST, 'strlen' );
 if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTemporaryToken") {
     $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/BankAccountToTemporaryToken';
     executeAPICall($_POST, $url, $_POST["api_method"]);
@@ -106,10 +100,10 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
     $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/PaymentDeviceChargeUpdate';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceCheckRegister") {
-    $url = '';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/PaymentDeviceCheckRegister';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceCheckUpdate") {
-    $url = '';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/PaymentDeviceCheckUpdate';
     executeAPICall($_POST, $url, $_POST["api_method"]); 
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "PaymentDeviceOnFileRemove") {
     $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/PaymentDeviceOnFileRemove';
@@ -163,7 +157,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
     $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ReversePayment';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "ReverseCheckPayment") {
-    $url = '';
+    $url = 'https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/ReverseCheckPayment';
     executeAPICall($_POST, $url, $_POST["api_method"]);
 } elseif (isset($_POST["api_method"]) AND $_POST["api_method"] == "TestCurl") {
     //THIS WAS TRYING TO USE CURL AND I COULDN'T GET IT TO WORK
@@ -171,9 +165,8 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
         'ChargeAccountNumber' => $_POST['ChargeAccountNumber'],
         'AccountName' => $_POST['AccountName']
     );
-    debug_to_console('post_data<br />', $post_data);
+    debug_to_console('post_data ', $post_data);
     $curl = curl_init();
-//    output('What is curl: <br />', $curl);
 
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
@@ -265,7 +258,7 @@ if (isset($_POST["api_method"]) AND $_POST["api_method"] == "BankAccountToTempor
 
 function getSessionTags($_DATA) {
     $url = "https://vsafeecl3.ecustomersupport.com:6060/GatewayV3Proxy/Service/GetSessionTags";
-
+debug_to_console('Is FingerPrint HERE:', $_DATA);
     $payload = array(
         'TransactionID' => $_DATA['TransactionID'],
         'AccountName' => $_DATA['AccountName'],
@@ -289,8 +282,9 @@ function getSessionTags($_DATA) {
 
     $error = null;
     if ($result['ResponseCode'] == 0) {
-        debug_to_console('Successfully called GetSessionTags<br />', $result);
-        $fingerprintEndpoint = 'https://paysafe.ecustomerpayments.com/PaySafeUIRedirector';
+        debug_to_console('Successfully called GetSessionTags ', $result);
+//        $fingerprintEndpoint = 'https://paysafe.ecustomerpayments.com/PaySafeUIRedirector';
+        $fingerprintEndpoint = 'https://fingerprint.ecustomerpayments.com/ThreatMetrixUIRedirector';
         $embedHtml = sprintf('<p style="background:url(%1$s/fp/clear.png?org_id=%2$s&session_id=%3$s&m=1);"></p> <img src="%1$s/fp/clear.png?org_id=%2$s&session_id=%3$s&m=2" /> <script type="text/javascript" src="%1$s/fp/check.js?org_id=%2$s&session_id=%3$s"></script> <object data="%1$s/fp/fp.swf?org_id=%2$s&session_id=%3$s" type="application/x-shockwave-flash" width="1" height="1"> <param value="%1$s/fp/fp.swf?org_id=%2$s&session_id=%3$s" name="movie" /> </object>'
                 , $fingerprintEndpoint
                 , $result['OrgID']
@@ -332,7 +326,7 @@ function getToken($PostData) {
 
         $cardToken = $result['ChargeAccountNumberToken'];
 
-        debug_to_console("SUCCESS getting token:<br />", $cardToken);
+        debug_to_console("SUCCESS getting token: ", $cardToken);
 
         return $cardToken;
     } else {

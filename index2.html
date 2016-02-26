@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="styles/mystyle.css">
-    </head>
+     </head>
     <body>
         <div id="layout">
             <div id="header">Vesta V3 ECl Test API Tool</div>
@@ -65,7 +65,16 @@
                                 <div id="footer">
                                     <fieldset>
                                         <div id="container1" class="hidden">
-                                            <div id="accountName">
+<!--                                            <input type="hidden" name="Fingerprint" id="Fingerprint">
+                                                <script type="text/javascript">
+                                                    var io_bbout_element_id = "Fingerprint";
+                                                    var io_exclude_stm = 15;
+                                                    var io_install_stm = false;
+                                                    var io_install_flash = false;
+                                                    var io_enable_rip = true;
+                                                </script>
+                                            <script type="text/javascript" src="https://mpsnare.iesnare.com/snare.js"> </script>-->
+                                             <div id="accountName">
                                                 <label class="requiredred" for="AccountName">Account Name:</label> <input type="text" id="AccountName" name="AccountName" />
                                             </div>
                                             <div id="additionalAmount">
@@ -146,6 +155,9 @@
                                             <div id="checkAmount">
                                                 <label class="requiredred" for="CheckAmount">Check Amount:</label> <input type="text" id="CheckAmount" name="CheckAmount" />
                                             </div>
+                                            <div id="checkCompanyName">
+                                                <label class="requiredred" for="CheckCompanyName">Check Company Name:</label> <input type="text" id="CheckCompanyName" name="CheckCompanyName" />
+                                            </div>
                                             <div id="checkHolderAddressLine1">
                                                 <label class="requiredred" for="CheckHolderAddressLine1">Address Line 1:</label> <input type="text" id="CheckHolderAddressLine1" name="CheckHolderAddressLine1" />
                                             </div>
@@ -156,7 +168,7 @@
                                                 <label class="requiredred" for="CheckHolderCity">City:</label> <input type="text" id="CheckHolderCity" name="CheckHolderCity" />
                                             </div>
                                             <div id="checkHolderCompanyName">
-                                                <label class="optional" for="checkHolderCompanyName">Check Holder Company Name:</label> <input type="text" id="checkHolderCompanyName" name="checkHolderCompanyName" />
+                                                <label class="optional" for="CheckHolderCompanyName">Check Holder Company Name:</label> <input type="text" id="CheckHolderCompanyName" name="CheckHolderCompanyName" />
                                             </div>
                                             <div id="checkHolderCountryCode">
                                                 <label class="requiredred" for="CheckHolderCountryCode">Country Code:</label> <input type="text" id="CheckHolderCountryCode" name="CheckHolderCountryCode" />
@@ -325,14 +337,12 @@
                                     <TABLE BORDER="1" WIDTH="900px" >
                                         <tr>
                                             <td>
-                                                <div class='test'>
                                                     <div style='float: left;'>
                                                         <input id="Submit" type="submit" value="submit">
                                                     </div>
                                                     <div style='float: right;'>
                                                         <input id="Reset" type="button" value="Reset" onclick="return Reset_Form()" />
                                                     </div>
-                                                </div>
                                             </td>
                                         </tr>
                                     </TABLE>
@@ -444,7 +454,7 @@
                     $(".hidden > *").css('display', 'none');
 
                     $("#accountName").show();
-                    $("#chargeAccountNumber").show()
+                    $("#chargeAccountNumber").show();
                     $("#chargeAccountNumberIndicator").show();
                     $("#encryptionBlock").show();
                     $("#encryptionTarget").show();
@@ -801,7 +811,7 @@
                     $("#checkHolderPhoneNumber").show();
                     $("#checkHolderPostalCode").show();
                     $("#checkHolderRegion").show();
-                    $("#chargeExpirationMMYY").show();
+//                    $("#chargeExpirationMMYY").show();
                     $("#merchantDeviceDescriptor").show();
                     $("#merchantRoutingID").show();
                     $("#password").show();
@@ -944,6 +954,7 @@
                     $("#partnerCustomerKey").show();
                     $("#password").show();
                     $("#paymentDescriptor").show();
+                    $("#riskInformation").show();
                     $("#storeCard").show();
                     $("#transactionID").show();
                     $("#webSessionID").show();
@@ -971,5 +982,5 @@
                 }
             }
         </script>
-    </body>
+    </body>                                         
 </html>
