@@ -16,6 +16,8 @@ require('helpers.php');
 //Visa Successful       4001414208480156
 //Pend need year EF5AQTEV
 //pend time out EF5AQTEW
+//BankRoutingNumber:323274458,
+//CheckAccountNumber:021000021
 //Visa CVN mismantch    4001420771215028
 //Visa Debit sale successful    4200101372721718
 //Visa Insufficient Funds   4614157022664880
